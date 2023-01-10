@@ -15,6 +15,9 @@ import { margin, padding } from "@mui/system/spacing";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCardStart, getCardStart, getCardSuccess } from "./DiaryHomeSlice";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import SearchAppBar from "../../components/Navbar/Navbar";
+
 
 interface MyProps {
   [x: string]: any;
@@ -31,6 +34,7 @@ const Home = () => {
     const params = useParams();
     const userName = params.userName;
     const dispatch = useDispatch(); 
+    const handle = useFullScreenHandle();
 
     // const readData = async() =>{
     //   var cardContent = [] as any;
@@ -83,11 +87,10 @@ const Home = () => {
     }
 
     const cardContentRedux = useSelector((state: MyProps) => state.card.cards);
-    console.log("line 86 reduxcard ",cardContentRedux);
 
     return ( 
-        <>
-        <Navbar/>
+        <> 
+        <SearchAppBar />
         <form onSubmit={handleSubmit}>
         <Box sx={{ flexGrow: 2, display:'flex' }}>
             
@@ -106,6 +109,7 @@ const Home = () => {
                     backgroundColor: '#F0f8FF',
                     width: '100%',
                     marginRight: '2vw',
+                    input:{color: 'black'}
                   },
                 }}
   
@@ -153,7 +157,6 @@ const Home = () => {
         </Box>
         </form>
       
-
         <Grid container spacing={2} sx={{marginLeft:'0.5vw'}}>
           {cardContentRedux.map((m: { [x: string]: string; }) => {
             return (
@@ -163,7 +166,6 @@ const Home = () => {
             )
           })}
         </Grid>
-        
         </>
      );
 }

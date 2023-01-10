@@ -8,6 +8,12 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { useState } from 'react';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+
+interface props{
+  handle: any;
+}
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,6 +58,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+
+  const [fullscreen, setFullScreen] = useState(false);
+
+  const handleClick = (fn: any) => {
+    setFullScreen(!fullscreen);
+    if(fullscreen){
+      fn.exit();
+    }else{
+      fn.enter();
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{background:'#ADD8E6'}}>
@@ -62,8 +80,10 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+            onClick = {()=> {
+            }}
+          > 
+          <FullscreenIcon/>
           </IconButton>
           <Typography
             variant="h6"
